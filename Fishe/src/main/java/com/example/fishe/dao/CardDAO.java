@@ -10,4 +10,6 @@ public interface CardDAO {
 
     Card save(Card card);
 
+    Card findById(int id);
+
 }

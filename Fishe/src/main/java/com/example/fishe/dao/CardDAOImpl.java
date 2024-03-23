@@ -27,4 +27,10 @@ public EntityManager entityManager;
     public Card save(Card card) {
         return entityManager.merge(card);
     }
+
+    @Override
+    public Card findById(int id) {
+        return entityManager.find(Card.class,id);
+
+    }
 }

@@ -2,6 +2,7 @@ package com.example.fishe.service;
 
 import com.example.fishe.dao.CardDAO;
 import com.example.fishe.entity.Card;
+import com.example.fishe.exceptions.EmptyCardException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,15 @@ public class CardServiceImpl implements CardService{
     }
     @Transactional
     @Override
-    public Card save(Card card) {
-    return     cardDAO.save(card);
+    public Card save(Card card)  {
+
+            if(card.getQuestion().isEmpty()||card.getAnswer().isEmpty())
+            {
+                throw new EmptyCardException("Question and answer cannot be empty.");
+
+            }
+            else
+                return cardDAO.save(card);
+
     }
 }
